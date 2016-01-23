@@ -9,7 +9,7 @@
 #
 
 # Install libs and some utilites fro php7 
-apt-get install -y wget curl git vim make build-essential libtool gettext libpcre3 libpcre3-dev libldap2-dev libpq-dev libxslt-dev libxpm-dev libmysqlclient-dev libgmp3-dev libpng12-dev libpng-dev libfreetype6-dev autoconf re2c bison libssl-dev libcurl4-openssl-dev pkg-config openssl libpng-dev libpspell-dev librecode-dev libreadline-dev libjpeg-dev libxml2-dev libbz2-dev libmcrypt-dev libicu-dev libltdl-dev libxml2 libcurl3
+apt-get install -y wget curl git vim make build-essential libtool gettext libpcre3 libpcre3-dev libldap2-dev libpq-dev libxslt-dev libxpm-dev libmysqlclient-dev libgmp3-dev libpng12-dev libpng-dev libfreetype6-dev autoconf re2c bison libssl-dev libcurl4-openssl-dev pkg-config openssl libpng-dev libpspell-dev librecode-dev libreadline-dev libjpeg-dev libxml2 libxml2-dev libbz2-dev libmcrypt-dev libicu-dev libltdl-dev  libcurl3
 
 # Downloads PHP7
 cd /usr/src && wget http://be2.php.net/get/php-7.0.2.tar.gz/from/this/mirror -O php-7.0.2.tar.gz && tar -xzf php-*.tar.gz
@@ -76,9 +76,10 @@ mkdir -p /etc/php/mods-available
 # copy my template files 
 cp -rf /usr/local/src/php/mods-available/* /etc/php/mods-available/
 cp -rf /usr/local/src/php/fpm/*.ini /etc/php/
+rm -rf /etc/php/php-fpm.conf
 cp -rf /usr/local/src/php/fpm/*.conf /etc/php/
-cp -rf /usr/local/src/php/fpm/pool.d/*.conf /etc/php/pool.d/
-cp -rf /usr/local/src/php/fpm/conf.d/*.ini /etc/php/conf.d/
+cp -rf /usr/local/src/php/fpm/conf.d/*.ini /etc/php/fpm/conf.d/
+cp -rf /usr/local/src/php/fpm/pool.d/*.conf /etc/php/fpm/pool.d/
 
 # download init script for PHP7-FPM
 cd /etc/init.d && wget http://linux-notes.org/wp-content/uploads/files/php7-fpm
