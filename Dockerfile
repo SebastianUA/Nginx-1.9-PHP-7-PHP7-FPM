@@ -21,9 +21,6 @@ RUN apt-get -y update
 
 #RUN cd /usr/local/src/ && wget http://download.redis.io/releases/redis-3.0.6.tar.gz && tar xzf /usr/local/src/redis-* && cd /usr/local/src/redis-* && make 32bit && make install clean
 
-#RUN mkdir /etc/redis
-
-#COPY /redis/redis.conf /etc/redis/
 
 # Define mountable directories.
 #VOLUME ["/var/otp"]
@@ -70,6 +67,10 @@ RUN buildDeps='gcc libc6-dev make' \
 RUN mkdir /data && chown redis:redis /data
 VOLUME ["/data"]
 #WORKDIR /data
+
+RUN mkdir /etc/redis
+
+COPY /redis/redis.conf /etc/redis/
 
 #
 COPY docker-entrypoint-redis.sh /entrypoint-redis.sh
@@ -268,11 +269,11 @@ WORKDIR /usr/local/src/
 RUN cd /usr/local/src/ && git clone https://github.com/magento/magento2.git
 RUN ls -al /usr/local/src/
 
-WORKDIR /usr/share/nginx/html
-#RUN cd /usr/share/nginx/html && cp -rf /usr/local/src/magento2/* /usr/share/nginx/html/
-RUN cd /usr/share/nginx/html && git clone https://github.com/magento/magento2.git
-RUN ls -al /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html/
+RUN cd /usr/share/nginx/html/ && git clone https://github.com/magento/magento2.git
+RUN ls -al /usr/share/nginx/html/
 
+RUN cd /usr/share/nginx/html && cp -rf /usr/local/src/magento2/* /usr/share/nginx/html/
 
 RUN chown -R www-data. /usr/share/nginx
 RUN chmod -R 755 /usr/share/nginx/
@@ -285,13 +286,25 @@ RUN chmod -R 755 /usr/share/nginx/
 VOLUME ["/usr/share/nginx/html"]
 
 ##########################################################################################################################################################
+
+RUN cp /etc/hosts /hosts
+
+#RUN echo 192.168.103.66 m2.demo > /hosts; ping -c 4 m2.demo
+
+RUN mkdir -p -- /lib-override && cp /lib/x86_64-linux-gnu/libnss_files.so.2 /lib-override
+RUN perl -pi -e 's:/etc/hosts:/hosts:g' /lib-override/libnss_files.so.2
+ENV LD_LIBRARY_PATH /lib-override
+#################
+#perl -pi -e 's:/etc/hosts:/hosts:g' /lib/x86_64-linux-gnu/libnss_files.so.2
+
+
 COPY supervisord.conf /etc/supervisor/conf.d/
 
 EXPOSE 22 80 443 9000 6379 3306
 
 # redis
-#CMD ["redis-server", "/etc/redis/redis.conf"]
-CMD ["redis-server"]
+CMD ["redis-server", "/etc/redis/redis.conf"]
+#CMD ["redis-server"]
 
 # mysql
 CMD ["mysqld"]
