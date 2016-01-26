@@ -13,11 +13,22 @@ Basic usage inside the repos root dir:
 `docker build -t <nameofyourchoosing> .`
 
 Example:
-`docker build -t my_docker .`
+`docker build -t m2 .`
 
 
 then:
 
-`docker run -d -p 127.0.0.1:80:80 -v /var/www:/var/www <nameofyourchoosing>`
+`docker run -d -p 127.0.0.1:80:80 -v /var/www:/var/www m2`
 
+OR
+
+`docker run -d -p 80:80 -i -t m2 `
+
+If you want to start bash in docker container):
+
+`docker run -i -t m2 /bin/bash`
+
+If you want use /etc/hosts:
+
+` docker run -d -p 80:80 -v /etc/hosts:/hosts -i -t m2`
 
