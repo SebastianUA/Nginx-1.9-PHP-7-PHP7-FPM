@@ -260,13 +260,12 @@ COPY nginx/php_info.php /usr/share/nginx/html/
 # https://github.com/magento/magento2
 ######################################
 
-WORKDIR /usr/local/src/
-RUN cd /usr/local/src/ && git clone https://github.com/magento/magento2.git
-RUN ls -al /usr/local/src/
-
 WORKDIR /usr/share/nginx/html/magento2
 RUN git clone https://github.com/magento/magento2 /usr/share/nginx/html/magento2
 RUN ls -al /usr/share/nginx/html/
+#RUN mv /usr/share/nginx/html/magento2/* /usr/share/nginx/html/
+#RUN rm -rf /usr/share/nginx/html/magento2
+#RUN ls -al /usr/share/nginx/html/
 
 RUN chown -R www-data. /usr/share/nginx/
 RUN chmod -R 755 /usr/share/nginx
@@ -282,9 +281,9 @@ VOLUME ["/usr/share/nginx/html"]
 # clean packages
 RUN apt-get clean
 RUN rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+RUN rm -rf /usr/local/src/*
 
 RUN cp /etc/hosts /hosts
-
 #RUN echo 192.168.103.66 m2.demo > /hosts; ping -c 4 m2.demo
 
 RUN mkdir -p -- /lib-override && cp /lib/x86_64-linux-gnu/libnss_files.so.2 /lib-override
