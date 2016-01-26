@@ -47,6 +47,7 @@ if [ "$1" = 'mysqld' ]; then
 
 		if [ ! -z "$MYSQL_RANDOM_ROOT_PASSWORD" ]; then
 			MYSQL_ROOT_PASSWORD="$(pwgen -1 32)"
+			#MYSQL_ROOT_PASSWORD="root"
 			echo "GENERATED ROOT PASSWORD: $MYSQL_ROOT_PASSWORD"
 		fi
 		"${mysql[@]}" <<-EOSQL
