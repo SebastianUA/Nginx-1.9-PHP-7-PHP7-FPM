@@ -78,6 +78,7 @@ dpkg -i /usr/src/php-7.0.2/php_7*.deb
 mkdir /usr/local/php7/etc/conf.d
 
 # copy my template files 
+cd /usr/local/src && git clone https://github.com/SebastianUA/Nginx-1.9-PHP-7-PHP7-FPM.git && cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM /usr/local/src
 cp -rf /usr/local/src/php/fpm/*.ini /usr/local/etc/
 cp -rf /usr/local/src/php/mods-available/* /usr/local/php7/etc/conf.d/
 cp -rf /usr/local/src/php/fpm/pool.d/www.conf /usr/local/php7/etc/php-fpm.d/www.conf
