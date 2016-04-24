@@ -20,10 +20,12 @@ rm -rf /var/lib/apt/lists/*
 
 #Copy some confs
 cd /usr/local/src
+wget https://raw.githubusercontent.com/SebastianUA/Nginx-1.9-PHP-7-PHP7-FPM/master/nginx/default.conf
+wget https://raw.githubusercontent.com/SebastianUA/Nginx-1.9-PHP-7-PHP7-FPM/master/nginx/php_info.php
+wget https://raw.githubusercontent.com/SebastianUA/Nginx-1.9-PHP-7-PHP7-FPM/master/nginx/test.html
 cp -rf /usr/local/src/nginx/default.conf /etc/nginx/conf.d/default.conf 
 cp -rf /usr/local/src/nginx/test.html /usr/share/nginx/html/
 cp -rf /usr/local/src/nginx/php_info.php /usr/share/nginx/html/
-
 
 # Start nginx1.9
 service nginx restart
