@@ -8,7 +8,8 @@
 # Vitaliy Natarov
 #
 
-# Install libs and some utilites fro php7 
+# Install libs and some utilites fro php7
+apt-get update -y && apt-get upgrade -y
 apt-get install -y wget curl git vim make checkinstall build-essential libtool gettext libpcre3 libpcre3-dev libldap2-dev libpq-dev libxslt-dev libxpm-dev libmysqlclient-dev libgmp3-dev libpng12-dev libpng-dev libfreetype6-dev autoconf re2c bison libssl-dev libcurl4-openssl-dev pkg-config openssl libpng-dev libpspell-dev librecode-dev libreadline-dev libjpeg-dev libxml2 libxml2-dev libbz2-dev libmcrypt-dev libicu-dev libltdl-dev  libcurl3
 
 # Downloads PHP7
@@ -75,7 +76,7 @@ dpkg -i /usr/src/php-7.0.2/php_7*.deb
 
 
 # create the configuration structure
-mkdir /usr/local/php7/etc/conf.d
+mkdir -p /usr/local/php7/etc/conf.d
 
 # copy my template files 
 cd /usr/local/src && git clone https://github.com/SebastianUA/Nginx-1.9-PHP-7-PHP7-FPM.git && cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM /usr/local/src
