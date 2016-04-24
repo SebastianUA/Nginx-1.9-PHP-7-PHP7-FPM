@@ -80,14 +80,14 @@ mkdir -p /usr/local/php7/etc/conf.d
 
 # copy my template files 
 cd /usr/local/src && git clone https://github.com/SebastianUA/Nginx-1.9-PHP-7-PHP7-FPM.git && cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM /usr/local/src
-cp -rf /usr/local/src/php/fpm/*.ini /usr/local/etc/
-cp -rf /usr/local/src/php/mods-available/* /usr/local/php7/etc/conf.d/
-cp -rf /usr/local/src/php/fpm/pool.d/www.conf /usr/local/php7/etc/php-fpm.d/www.conf
-cp -rf /usr/local/src/php/fpm/php-fpm.conf /usr/local/php7/etc/php-fpm.conf
+cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM/php/fpm/*.ini /usr/local/etc/
+cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM/php/mods-available/* /usr/local/php7/etc/conf.d/
+cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM/php/fpm/pool.d/www.conf /usr/local/php7/etc/php-fpm.d/www.conf
+cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM/php/fpm/php-fpm.conf /usr/local/php7/etc/php-fpm.conf
 
 # Add init script for PHP7-FPM
-cp -rf /usr/local/src/php/php7-fpm /etc/init.d/
-cp -rf /usr/local/src/php/php7-fpm.service /lib/systemd/system/
+cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM/php/php7-fpm /etc/init.d/
+cp -rf /usr/local/src/Nginx-1.9-PHP-7-PHP7-FPM/php/php7-fpm.service /lib/systemd/system/
 systemctl enable php7-fpm.service
 systemctl daemon-reload
 
